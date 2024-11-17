@@ -1,25 +1,25 @@
 {
   /* This TypeScript project config describes the environment that
    * Convex functions run in and is used to typecheck them.
-   * You can modify it, but some settings required to use Convex.
+   * You can modify it, but some settings are required to use Convex.
    */
   "compilerOptions": {
-    /* These settings are not required by Convex and can be modified. */
-    "allowJs": true,
-    "strict": true,
-    "moduleResolution": "Bundler",
-    "jsx": "react-jsx",
-    "skipLibCheck": true,
-    "allowSyntheticDefaultImports": true,
+    /* Optional settings for development enhancements */
+    "allowJs": true, // Allows JavaScript files to be imported
+    "strict": true, // Enables all strict type-checking options
+    "moduleResolution": "Bundler", // Resolves modules for bundler-compatible imports
+    "jsx": "react-jsx", // JSX syntax support for React
+    "skipLibCheck": true, // Skips type checks on library files for faster builds
+    "allowSyntheticDefaultImports": true, // Enables synthetic default imports
 
-    /* These compiler options are required by Convex */
-    "target": "ESNext",
-    "lib": ["ES2021", "dom"],
-    "forceConsistentCasingInFileNames": true,
-    "module": "ESNext",
-    "isolatedModules": true,
-    "noEmit": true
+    /* Required compiler options for Convex */
+    "target": "ESNext", // Latest ECMAScript version targeting modern environments
+    "lib": ["ES2021", "dom"], // Includes modern JavaScript and DOM APIs
+    "forceConsistentCasingInFileNames": true, // Ensures consistent file naming
+    "module": "ESNext", // Uses ESNext module syntax
+    "isolatedModules": true, // Required for module isolation
+    "noEmit": true // Disables emitting compiled files
   },
-  "include": ["./**/*"],
-  "exclude": ["./_generated"]
+  "include": ["./**/*"], // Includes all files in the project
+  "exclude": ["./_generated"] // Excludes generated files from the Convex framework
 }
