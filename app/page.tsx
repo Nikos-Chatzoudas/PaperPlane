@@ -4,8 +4,9 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { Search, Settings, Send, Paperclip, Smile } from "lucide-react";
+import { Search, Send, Paperclip, Smile } from "lucide-react";
 import { UserButton } from "@/components/user-button";
+import { Sidebar } from "@/components/sidebar";
 
 export default function Home() {
   const [input, setInput] = useState("");
@@ -70,64 +71,7 @@ export default function Home() {
   return (
     <div className="flex h-screen bg-black text-zinc-300">
       {/* Sidebar */}
-      <div className="w-[25%] bg-zinc-900 border-r border-zinc-800">
-        <div className="p-4 flex justify-between items-center border-b border-zinc-800">
-          <h2 className="text-xl font-semibold text-white">Chats</h2>
-          <div className="flex gap-2">
-            <Button
-              variant="ghost"
-              size="icon"
-              className="text-zinc-400 hover:text-black"
-            >
-              <Settings className="h-5 w-5" />
-              <span className="sr-only">Settings</span>
-            </Button>
-            <UserButton />
-          </div>
-        </div>
-        <div className="p-4">
-          <div className="relative">
-            <Search className="absolute left-2 top-2.5 h-4 w-4 text-zinc-500" />
-            <Input
-              placeholder="Search"
-              className="pl-8 bg-zinc-800 border-zinc-700 text-zinc-300 placeholder-zinc-500"
-            />
-          </div>
-        </div>
-        <ScrollArea className="h-[calc(100vh-8rem)]">
-          {conversations.map((conversation) => (
-            <div
-              key={conversation.id}
-              className="p-4 hover:bg-zinc-800 cursor-pointer"
-            >
-              <div className="flex items-center space-x-4">
-                <Avatar>
-                  <AvatarImage
-                    src={conversation.avatar}
-                    alt={conversation.name}
-                  />
-                  <AvatarFallback>
-                    {conversation.name
-                      .split(" ")
-                      .map((n) => n[0])
-                      .join("")}
-                  </AvatarFallback>
-                </Avatar>
-                <div className="flex-1 min-w-0">
-                  <p className="text-sm font-medium text-zinc-200 truncate">
-                    {conversation.name}
-                  </p>
-                  <p className="text-sm text-zinc-500 truncate">
-                    {conversation.lastMessage}
-                  </p>
-                </div>
-                <div className="text-xs text-zinc-500">{conversation.time}</div>
-              </div>
-            </div>
-          ))}
-        </ScrollArea>
-      </div>
-
+      <Sidebar />
       {/* Main Chat Area */}
       <div className="flex-1 flex flex-col bg-zinc-950">
         {/* Chat Header */}
