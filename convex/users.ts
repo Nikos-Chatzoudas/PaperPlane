@@ -14,6 +14,23 @@ export const current = query({
   },
 });
 
+export const get = query({
+  args: { userId: v.id("users") },
+  handler: async (ctx, args) => {
+    const user = await ctx.db.get(args.userId);
+    
+    if (!user) {
+      return null;
+    }
+
+    return {
+      id: user._id,
+      name: user.name,
+      image: user.image
+    };
+  },
+});
+
 export const search = query({
   args: { searchQuery: v.string() },
   handler: async (ctx, args) => {

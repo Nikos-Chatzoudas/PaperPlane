@@ -1,122 +1,52 @@
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { Send, Paperclip, Smile } from "lucide-react";
+import { Send, Paperclip, Smile, Loader } from "lucide-react";
+import { useOtherUser } from "@/hooks/use-other-user";
+import { Doc } from "../convex/_generated/dataModel";
 
-export const Chat = () => {
-  const [input, setInput] = useState("");
+interface ChatProps {
+  conversation: Doc<"conversations">;
+}
 
-  const conversations = [
-    {
-      id: 1,
-      name: "Alice Johnson",
-      avatar: "/placeholder.svg?height=32&width=32",
-      lastMessage: "Hey, how's it going?",
-      time: "10:30 AM",
-    },
-    {
-      id: 2,
-      name: "Bob Smith",
-      avatar: "/placeholder.svg?height=32&width=32",
-      lastMessage: "Did you see the game last night?",
-      time: "Yesterday",
-    },
-    {
-      id: 3,
-      name: "Carol Williams",
-      avatar: "/placeholder.svg?height=32&width=32",
-      lastMessage: "Can we reschedule our meeting?",
-      time: "Tuesday",
-    },
-  ];
-
-  const messages = [
-    {
-      id: 1,
-      sender: "Alice Johnson",
-      content: "Hey there! How's your day going?",
-      time: "10:30 AM",
-      isSent: false,
-    },
-    {
-      id: 2,
-      sender: "You",
-      content: "Hi Alice! It's going well, thanks for asking. How about yours?",
-      time: "10:32 AM",
-      isSent: true,
-    },
-    {
-      id: 3,
-      sender: "Alice Johnson",
-      content:
-        "That's great to hear! My day is going pretty well too. I just finished a big project at work.",
-      time: "10:35 AM",
-      isSent: false,
-    },
-    {
-      id: 4,
-      sender: "You",
-      content:
-        "Wow, congratulations on finishing your project! That must feel amazing. What was the project about?",
-      time: "10:38 AM",
-      isSent: true,
-    },
-  ];
-
-  const handleSendMessage = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (input.trim()) {
-      console.log("Sending message:", input);
-      setInput("");
-    }
-  };
+const Chat: React.FC<ChatProps> = ({ conversation }) => {
+  const [input, setInput] = useState<string>("");
+  const otherUser = useOtherUser(conversation);
+  const otherUserName = otherUser?.name;
 
   return (
-    <div className="flex-1 flex flex-col bg-zinc-950 m-4 ml-0 rounded-lg border-zinc-900 ">
+    <div className="flex-1 flex flex-col bg-zinc-950 m-4 ml-0 rounded-lg w-full">
       {/* Chat Header */}
       <div className="p-3 flex items-center gap-3">
-        <div className="size-10">
-          <Avatar className="size-10">
-            <AvatarImage
-              src="/placeholder.svg?height=40&width=40"
-              alt="Alice Johnson"
-            />
-            <AvatarFallback>AJ</AvatarFallback>
-          </Avatar>
-        </div>
+        <Avatar className="size-10">
+          <AvatarImage
+            src={otherUser?.image || "/placeholder.svg?height=40&width=40"}
+            alt={otherUser?.name || conversation.name || "Chat"}
+          />
+          <AvatarFallback>
+            {(otherUser?.name || conversation.name || "Chat").substring(0, 2)}
+          </AvatarFallback>
+        </Avatar>
         <div>
-          <h2 className="text-lg font-semibold text-white">Alice Johnson</h2>
-          <p className="text-sm text-zinc-400">Online</p>
+          <h2 className="text-lg font-semibold text-white">
+            {otherUser?.name || conversation.name || "Chat"}
+          </h2>
+          <p className="text-sm text-zinc-400">
+            {conversation.isGroup ? "Group Chat" : "Direct Message"}
+          </p>
         </div>
       </div>
 
       {/* Messages */}
-      <ScrollArea className="flex-1 p-4">
-        <div className="space-y-4">
-          {messages.map((message) => (
-            <div
-              key={message.id}
-              className={`flex ${message.isSent ? "justify-end" : "justify-start"}`}
-            >
-              <div
-                className={`max-w-[70%] rounded-lg p-3 ${message.isSent ? "bg-blue-600 text-white" : "bg-zinc-800 text-zinc-300"}`}
-              >
-                <p className="text-sm">{message.content}</p>
-                <p className="text-xs text-zinc-400 mt-1">{message.time}</p>
-              </div>
-            </div>
-          ))}
-        </div>
+      <ScrollArea className="flex-1 p-4 overflow-y-auto">
+        <div className="space-y-4"></div>
       </ScrollArea>
 
       {/* Message Input */}
-      <div className="p-4 ">
-        <form
-          onSubmit={handleSendMessage}
-          className="flex items-center space-x-2"
-        >
+      <div className="p-4">
+        <form className="flex items-center space-x-2">
           <Button
             type="button"
             size="icon"
@@ -131,7 +61,7 @@ export const Chat = () => {
             placeholder="Type a message"
             value={input}
             onChange={(e) => setInput(e.target.value)}
-            className="flex-1 bg-zinc-800 border-zinc-700 text-zinc-300 placeholder-zinc-500"
+            className="flex-1 bg-zinc-800 border-none  text-zinc-300 placeholder-zinc-500"
           />
           <Button
             type="button"
@@ -146,6 +76,7 @@ export const Chat = () => {
             type="submit"
             size="icon"
             className="bg-blue-600 hover:bg-blue-700 text-white"
+            disabled={!input.trim()}
           >
             <Send className="h-5 w-5" />
             <span className="sr-only">Send message</span>
@@ -155,3 +86,5 @@ export const Chat = () => {
     </div>
   );
 };
+
+export { Chat };

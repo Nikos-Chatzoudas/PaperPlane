@@ -16,7 +16,11 @@ export const UserButton = () => {
   const { signOut } = useAuthActions();
 
   if (isLoading) {
-    return <Loader className="size-4 animate-spin text-zinc-400" />;
+    return (
+      <div className="size-10  flex justify-center items-center">
+        <Loader className="size-4 animate-spin text-zinc-400" />
+      </div>
+    );
   }
 
   if (!data) {
