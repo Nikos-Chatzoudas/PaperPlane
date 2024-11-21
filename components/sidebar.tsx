@@ -40,7 +40,7 @@ export const Sidebar = () => {
 
   return (
     <div className="w-[25%] bg-zinc-900 m-4 rounded-lg">
-      <div className="p-3 flex justify-between items-center">
+      <div className="p-3 flex justify-between items-center h-16 ">
         <h2 className="text-xl font-semibold text-white">Chats</h2>
         <UserButton />
       </div>

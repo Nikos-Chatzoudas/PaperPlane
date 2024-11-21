@@ -17,9 +17,9 @@ const Chat: React.FC<ChatProps> = ({ conversation }) => {
   const otherUserName = otherUser?.name;
 
   return (
-    <div className="flex-1 flex flex-col bg-zinc-950 m-4 ml-0 rounded-lg w-full">
+    <div className="flex-1 flex flex-col bg-zinc-950 m-4 ml-0 rounded-lg w-full ">
       {/* Chat Header */}
-      <div className="p-3 flex items-center gap-3">
+      <div className="p-3 flex items-center gap-3 h-16">
         <Avatar className="size-10">
           <AvatarImage
             src={otherUser?.image || "/placeholder.svg?height=40&width=40"}
