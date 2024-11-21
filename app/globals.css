@@ -11,7 +11,7 @@ body,
   color: white;
   font-family: "Rubik", sans-serif;
 }
-  
+
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -79,4 +79,7 @@ body,
   body {
     @apply dark:text-white;
   }
+}
+.no-hover-bg:hover {
+  background-color: transparent !important;
 }

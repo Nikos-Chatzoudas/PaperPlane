@@ -17,11 +17,13 @@ export default function SignIn() {
 
   return (
     <div className="min-h-screen flex items-center justify-center">
-      <Card className="w-full max-w-md bg-zinc-900 border-zinc-700">
-        <CardHeader className="space-y-1 text-center">
+      <Card className="w-full max-w-md bg-zinc-900 border-none">
+        <CardHeader className="space-y-1 text-center flex flex-col justify-center items-center">
+          <img className="w-20" src="logo.png" alt="" />
           <CardTitle className="text-2xl text-white font-bold">
-            Hello There!
+            Welcome to PaperPlane
           </CardTitle>
+
           <p className="text-white">Sign in to your account</p>
         </CardHeader>
         <CardContent className="space-y-4">

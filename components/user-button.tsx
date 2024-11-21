@@ -1,13 +1,13 @@
 "use client";
 import { Loader, LogOut, Settings } from "lucide-react";
-import { Avatar } from "@radix-ui/react-avatar";
+
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
-import { AvatarFallback, AvatarImage } from "./ui/avatar";
+import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { useCurrentUser } from "@/hooks/use-current-user";
 import { useAuthActions } from "@convex-dev/auth/react";
 
@@ -39,12 +39,18 @@ export const UserButton = () => {
       <DropdownMenuContent
         align="center"
         side="right"
-        className="w-60 bg-zinc-800 text-zinc-100 rounded-md shadow-lg border-none m-1"
+        className="w-60 bg-zinc-800 text-zinc-100 rounded-md shadow-lg border-none m-1 p-3 flex flex-col gap-1"
       >
-        <DropdownMenuItem className="h-10 flex items-center px-4 hover:text-white  text-white text-center w-full justify-center">
-          {name}
-        </DropdownMenuItem>
-        <DropdownMenuItem className="h-10 flex items-center px-4 hover:text-white text-white">
+        <div className="flex justify-center">
+          <Avatar className="size-25">
+            <AvatarImage alt="pfp" src={image} className="rounded-full" />
+            <AvatarFallback className="bg-zinc-700 text-zinc-100">
+              {avatarfallback}
+            </AvatarFallback>
+          </Avatar>
+        </div>
+        <div className="font-bold flex justify-center p-2">{name}</div>
+        <DropdownMenuItem className="h-10 flex items-center px-4 hover:text-white text-white ">
           <Settings className="size-4 mr-2" />
           Settings
         </DropdownMenuItem>
