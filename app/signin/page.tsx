@@ -1,14 +1,14 @@
-"use client";
-import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { FcGoogle } from "react-icons/fc";
-import { useAuthActions } from "@convex-dev/auth/react";
-import { useState } from "react";
+'use client';
+import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { FcGoogle } from 'react-icons/fc';
+import { useAuthActions } from '@convex-dev/auth/react';
+import { useState } from 'react';
 
 export default function SignIn() {
   const [pending, SetPending] = useState(false);
   const { signIn } = useAuthActions();
-  const onProviderSignIn = (value: "google") => {
+  const onProviderSignIn = (value: 'google') => {
     SetPending(true);
     signIn(value).finally(() => {
       SetPending(false);
@@ -31,7 +31,7 @@ export default function SignIn() {
             disabled={pending}
             className=" text-white hover:text-white w-full flex items-center justify-center gap-2 bg-zinc-950 hover:bg-zinc-800 "
             variant="ghost"
-            onClick={() => onProviderSignIn("google")}
+            onClick={() => onProviderSignIn('google')}
           >
             <FcGoogle />
             Continue with Google

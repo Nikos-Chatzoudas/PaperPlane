@@ -18,7 +18,7 @@ import { api } from "../convex/_generated/api";
 import { useRouter } from "next/navigation";
 import { Id } from "../convex/_generated/dataModel";
 
-export const Sidebar = () => {
+export const Left_Sidebar = () => {
   const [isAddFriendDialogOpen, setIsAddFriendDialogOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const router = useRouter();
